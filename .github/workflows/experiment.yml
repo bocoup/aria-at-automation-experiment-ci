@@ -4,10 +4,13 @@ jobs:
   Virtual-Machine:
     runs-on: ubuntu-latest
     steps:
-      - name: Update package cache
-        run: sudo apt-get update
+      - name: Fetch VirtualBox
+        run:
+          wget
+            --output-document virtualbox-6.1.deb
+            'https://download.virtualbox.org/virtualbox/6.1.32/virtualbox-6.1_6.1.32-149290~Ubuntu~eoan_amd64.deb'
       - name: Install VirtualBox
-        run: sudo apt-get install --yes virtualbox-6.1
+        run: sudo dpkg -i virtualbox-6.1.deb
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
