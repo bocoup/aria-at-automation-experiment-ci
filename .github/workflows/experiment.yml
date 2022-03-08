@@ -4,6 +4,10 @@ jobs:
   Virtual-Machine:
     runs-on: ubuntu-latest
     steps:
+      - name: Update package cache
+        run: sudo apt-get update
+      - name: Install VirtualBox
+        run: sudo apt-get install --yes virtualbox-6.1
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
@@ -16,5 +20,3 @@ jobs:
           node-version: '16'
       - name: Install pnpm
         run: npm install -g pnpm
-      - name: Install VirtualBox
-        run: sudo apt-get install --yes virtualbox-6.1
