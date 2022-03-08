@@ -1,0 +1,13 @@
+name: GitHub Actions Experiment
+on: [push]
+jobs:
+  Virtual-Machine:
+    runs-on: ubuntu-latest
+    steps:
+      - run: lsb_release -a
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          rescursive: true
+      - run: git ls-files
+      - run: ls -lah Assistive-Webdriver

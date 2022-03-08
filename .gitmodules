@@ -1,0 +1,3 @@
+[submodule "Assistive-Webdriver"]
+	path = Assistive-Webdriver
+	url = https://github.com/AmadeusITGroup/Assistive-Webdriver.git
