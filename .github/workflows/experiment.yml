@@ -10,3 +10,11 @@ jobs:
           submodules: recursive
       - name: Fetch DLLs
         run: ./fetch-dlls.sh
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install VirtualBox
+        run: apt-get install --yes virtualbox-6.1
