@@ -4,12 +4,12 @@ jobs:
   Virtual-Machine:
     runs-on: ubuntu-latest
     steps:
-      - name: Install VirtualBox
-        run: sudo ./install-virtualbox.sh
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Install VirtualBox
+        run: sudo ./install-virtualbox.sh
       - name: Fetch DLLs
         run: ./fetch-dlls.sh
       - name: Install Node.js
