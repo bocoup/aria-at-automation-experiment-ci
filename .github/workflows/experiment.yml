@@ -17,4 +17,4 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Install VirtualBox
-        run: apt-get install --yes virtualbox-6.1
+        run: sudo apt-get install --yes virtualbox-6.1
