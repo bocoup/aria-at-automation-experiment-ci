@@ -10,6 +10,15 @@ jobs:
           submodules: recursive
       - name: Install VirtualBox
         run: sudo ./install-virtualbox.sh
+      - name: Install Vagrant
+        run: |-
+          set -e
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+          sudo apt-get update
+          sudo apt-get install vagrant
       - name: Fetch DLLs
         run: ./fetch-dlls.sh
       - name: Install Node.js
