@@ -13,7 +13,7 @@ jobs:
         env:
           cache-name: cache-windows-dependencies
         with:
-          path: ./Assistive-Webdriver/Assistive-Webdriver/vagrant/win10-chromium-nvda/software
+          path: ./Assistive-Webdriver/vagrant/win10-chromium-nvda/software
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./Assistive-Webdriver/Assistive-Webdriver/vagrant/win10-chromium-nvda/urls.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -21,7 +21,7 @@ jobs:
             ${{ runner.os }}-
       - name: Download Windows dependencies
         run: ./download.sh
-        working-directory: Assistive-Webdriver/Assistive-Webdriver/vagrant/win10-chromium-nvda
+        working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
       - name: Install VirtualBox
         run: |-
           set -e
