@@ -47,8 +47,3 @@ jobs:
       - name: Create virtual machine
         run: ./createVM.sh
         working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
-      - name: Inspect .vagrant
-        run: find .vagrant -type f -exec ls -lh '{}' \;
-        working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
-      - name: Inspect ~/.vagrant.d
-        run: find ~/.vagrant.d -type f -exec ls -lh '{}' \;
