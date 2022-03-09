@@ -8,6 +8,29 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Fetch DLLs
+        run: ./fetch-dlls.sh
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # pnpm cache files are stored in `~/.pnpm-store` on GNU/Linux and macOS
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Node.js dependencies
+        run: pnpm install
+        working-directory: Assistive-Webdriver
       - name: Cache Windows dependencies
         uses: actions/cache@v2
         env:
@@ -40,26 +63,3 @@ jobs:
 
           sudo apt-get update
           sudo apt-get install vagrant
-      - name: Fetch DLLs
-        run: ./fetch-dlls.sh
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # pnpm cache files are stored in `~/.pnpm-store` on GNU/Linux and macOS
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install Node.js dependencies
-        run: pnpm install
-        working-directory: Assistive-Webdriver
