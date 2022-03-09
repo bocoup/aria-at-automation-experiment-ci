@@ -2,7 +2,7 @@ name: GitHub Actions Experiment
 on: [push]
 jobs:
   Virtual-Machine:
-    runs-on: ubuntu-latest
+    runs-on: macos-10.15
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -37,24 +37,13 @@ jobs:
       - name: Download Windows dependencies
         run: ./download.sh
         working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
-      - name: Install VirtualBox
-        run: |-
-          set -e
-          wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-
-          sudo apt-add-repository "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib"
-
-          sudo apt-get update
-          sudo apt-get install virtualbox-6.1
-      - name: Install Vagrant
-        run: |-
-          set -e
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-
-          sudo apt-get update
-          sudo apt-get install vagrant
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Assistive-Webdriver/vagrant/win10-chromium-nvda/Vagrant*file') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
       - name: Create virtual machine
         run: ./createVM.sh
         working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
