@@ -15,7 +15,5 @@ jobs:
         with:
           path: ~/.vagrant.d/boxes
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
-          restore-keys: |
-            ${{ runner.os }}-vagrant-
       - name: Create virtual machine
         run: vagrant up
