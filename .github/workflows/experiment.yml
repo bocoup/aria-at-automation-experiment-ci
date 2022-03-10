@@ -6,44 +6,16 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Fetch DLLs
-        run: ./fetch-dlls.sh
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # pnpm cache files are stored in `~/.pnpm-store` on GNU/Linux and macOS
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install Node.js dependencies
-        run: pnpm install
-        working-directory: Assistive-Webdriver
-      # The combined size of these files is about 14.1 gigabytes. Since this
-      # exceeds GitHub's limitation for cache size (10 gigabytes), these files
-      # must be downloaded for every run.
-      - name: Download Windows dependencies
-        run: ./download.sh
-        working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
       - name: Cache Vagrant boxes
         uses: actions/cache@v2
         with:
           path: ~/.vagrant.d/boxes
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('Assistive-Webdriver/vagrant/win10-chromium-nvda/Vagrant*file') }}
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
       - name: Create virtual machine
-        run: ./createVM.sh
-        working-directory: Assistive-Webdriver/vagrant/win10-chromium-nvda
+        run: vagrant up
