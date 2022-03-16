@@ -30,4 +30,10 @@ find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
       --plan-workingdir ${directory} \
       --tests-match '*nvda.collected.json' \
       '**/*' || true
+
+    if ! ps -p ${virtualbox_server_pid} > /dev/null; then
+      echo 'Error: VirtualBox web server exited unexpectedly.' >&2
+
+      break
+    fi
   done
