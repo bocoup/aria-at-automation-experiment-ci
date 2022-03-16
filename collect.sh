@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # > Even though the NAT engine separates the VM from the host, the VM has
 # > access to the host's loopback interface and the network services running on
 # > it. The host's loopback interface is accessible as IP address 10.0.2.2.
@@ -27,5 +29,5 @@ find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
       --debug \
       --plan-workingdir ${directory} \
       --tests-match '*nvda.collected.json' \
-      '**/*'
+      '**/*' || true
   done
