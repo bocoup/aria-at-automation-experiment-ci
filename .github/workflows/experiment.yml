@@ -26,9 +26,7 @@ jobs:
         with:
           path: ~/.vagrant.d/boxes
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
-      - name: Create virtual machine
-        run: vagrant up
-      - name: Shut down virtual machine
-        run: vagrant halt
+      - name: Create virtual machine and snapshots
+        run: ./create-vm-snapshots.sh
       - name: Collect results
         run: ./collect.sh
