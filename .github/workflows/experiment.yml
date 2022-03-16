@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.vagrant.d/boxes
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile', 'create-vm-snapshots.sh') }}
       - name: Create virtual machine and snapshots
         run: ./create-vm-snapshots.sh
       - name: Collect results
