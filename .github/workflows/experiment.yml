@@ -12,15 +12,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Install aria-at-automation-harness
-        run: npm install
-        working-directory: aria-at-automation-harness
-      - name: Build ARIA-AT tests
-        run: npm run build
-        working-directory: aria-at
       - name: Install ARIA-AT dependencies
         run: npm install
         working-directory: aria-at
+      - name: Build ARIA-AT tests
+        run: npm run build
+        working-directory: aria-at
+      - name: Install aria-at-automation-harness
+        run: npm install
+        working-directory: aria-at-automation-harness
       - name: Cache Vagrant boxes
         uses: actions/cache@v2
         with:
