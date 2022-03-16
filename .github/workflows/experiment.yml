@@ -6,10 +6,21 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: Install aria-at-automation-harness
+        run: npm install
+        working-directory: aria-at-automation-harness
+      - name: Build ARIA-AT tests
+        run: npm run build
+        working-directory: aria-at
+      - name: Install ARIA-AT dependencies
+        run: npm install
+        working-directory: aria-at
       - name: Cache Vagrant boxes
         uses: actions/cache@v2
         with:
@@ -17,3 +28,7 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
       - name: Create virtual machine
         run: vagrant up
+      - name: Shut down virtual machine
+        run: vagrant halt
+      - name: Collect results
+        run: ./collect.sh

@@ -1,3 +1,6 @@
-[submodule "Assistive-Webdriver"]
-	path = Assistive-Webdriver
-	url = https://github.com/AmadeusITGroup/Assistive-Webdriver.git
+[submodule "aria-at"]
+	path = aria-at
+	url = git@github.com:w3c/aria-at.git
+[submodule "aria-at-automation-harness"]
+	path = aria-at-automation-harness
+	url = git@github.com:bocoup/aria-at-automation-harness.git
