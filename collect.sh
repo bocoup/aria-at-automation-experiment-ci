@@ -14,7 +14,7 @@ virtualbox_server_address=localhost:18083
 # > Oracle VM VirtualBox remotely.
 #
 # https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/vboxwebsrv-daemon.html
-vboxwebsrv --authentication null &
+vboxwebsrv --authentication null > /dev/null &
 
 virtualbox_server_pid=$!
 
