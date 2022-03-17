@@ -30,3 +30,7 @@ jobs:
         run: ./create-vm-snapshots.sh
       - name: Collect results
         run: ./collect.sh
+        env:
+          AWD_BROWSER_NAME: chromium
+          AWD_VM_NAME: win10-chromium-nvda
+          AWD_SNAPSHOT_NAME: jaws
