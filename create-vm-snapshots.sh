@@ -34,3 +34,14 @@ else
   vagrant snapshot save nvda
   vagrant halt -f
 fi
+
+if vagrant snapshot list | grep jaws &> /dev/null ; then
+  echo "Snapshot jaws already exists"
+else
+  echo "Creating jaws snapshot"
+  vagrant halt -f
+  vagrant snapshot restore --no-start noscreenreader
+  vagrant up --provision-with start-jaws
+  vagrant snapshot save jaws
+  vagrant halt -f
+fi
