@@ -61,7 +61,7 @@ find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
       --reference-hostname ${host_machine_loopback} \
       --debug \
       --plan-workingdir ${directory} \
-      --tests-match '*nvda.collected.json' \
+      --tests-match "*-${AWD_SNAPSHOT_NAME}.collected.json" \
       '**/*' || true
 
     verify_virtualbox_server_running
