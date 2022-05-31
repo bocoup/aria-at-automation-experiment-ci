@@ -33,6 +33,6 @@ jobs:
       - name: Collect results
         run: ./collect.sh
         env:
-          AWD_BROWSER_NAME: chromium
-          AWD_VM_NAME: win10-chromium-nvda
-          AWD_SNAPSHOT_NAME: nvda
+          AWD_BROWSER_NAME: firefox
+          AWD_VM_NAME: vagrant-macos-1015
+          AWD_SNAPSHOT_NAME: root
