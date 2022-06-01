@@ -22,16 +22,16 @@ jobs:
         run: npm install
         working-directory: aria-at-automation-harness
       - name: Create directory for virtual machines
-        run: mkdir "~/VirtualBox VMs"
+        run: mkdir "$HOME/VirtualBox VMs"
         shell: bash
       # This step cannot utilize the cache provided by GitHub Actions because
       # the size on disk (about 40 GB) exceeds the maximum available for
       # caching (10 GB)
       - name: Download archive of VirtualBox machine image
-        run: cd "~/VirtualBox VMs" && wget https://ewr1.vultrobjects.com/boxes/macos-1015.tar
+        run: cd "$HOME/VirtualBox VMs" && wget https://ewr1.vultrobjects.com/boxes/macos-1015.tar
         shell: bash
       - name: Extract VirtualBox machine image
-        run: cd "~/VirtualBox VMs" && tar xvf macos-1015.tar
+        run: cd "$HOME/VirtualBox VMs" && tar xvf macos-1015.tar
         shell: bash
       - name: Register VirtualBox machine image
         run: VBoxManage registervm "$HOME/VirtualBox VMs/macos-1015/macos-1015.vbox"
