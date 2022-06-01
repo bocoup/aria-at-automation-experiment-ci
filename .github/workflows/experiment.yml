@@ -21,18 +21,20 @@ jobs:
       - name: Install aria-at-automation-harness
         run: npm install
         working-directory: aria-at-automation-harness
-      - name: Cache Vagrant boxes
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./.vagrant
-            ~/.vagrant.d/boxes
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile', 'create-vm-snapshots.sh') }}
-      - name: Create virtual machine and snapshots
-        run: ./create-vm-snapshots.sh
+      - name: Create directory for virtual machines
+        run: mkdir "~/VirtualBox VMs"
+      # This step cannot utilize the cache provided by GitHub Actions because
+      # the size on disk (about 40 GB) exceeds the maximum available for
+      # caching (10 GB)
+      - name: Download archive of VirtualBox machine image
+        run: cd "~/VirtualBox VMs" && wget https://ewr1.vultrobjects.com/boxes/macos-1015.tar
+      - name: Extract VirtualBox machine image
+        run: cd "~/VirtualBox VMs" && tar xvf macos-1015.tar
+      - name: Register VirtualBox machine image
+        run: VBoxManage registervm "$HOME/VirtualBox VMs/macos-1015/macos-1015.vbox"
       - name: Collect results
         run: ./collect.sh
         env:
           AWD_BROWSER_NAME: firefox
-          AWD_VM_NAME: vagrant-macos-1015
-          AWD_SNAPSHOT_NAME: root
+          AWD_VM_NAME: macos-1015
+          AWD_SNAPSHOT_NAME: Base
