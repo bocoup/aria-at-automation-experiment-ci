@@ -54,7 +54,7 @@ trap kill_virtualbox_server EXIT
 
 echo Collecting results
 
-find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
+find aria-at/build/tests -mindepth 1 -maxdepth 1 -type d -print0 |
   while IFS= read -r -d '' directory; do
     echo ${directory}
 
