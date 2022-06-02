@@ -56,6 +56,10 @@ echo Collecting results
 
 find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
   while IFS= read -r -d '' directory; do
+    if [ "${directory}" != 'aria-at/build/tests/checkbox' ]; then
+      continue
+    fi
+
     ./aria-at-automation-harness/bin/host.js \
       run-plan \
       --reference-hostname ${host_machine_loopback} \
