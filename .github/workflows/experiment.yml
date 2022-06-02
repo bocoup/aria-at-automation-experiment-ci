@@ -21,6 +21,10 @@ jobs:
       - name: Install aria-at-automation-harness
         run: npm install
         working-directory: aria-at-automation-harness
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
       - name: Create directory for virtual machines
         run: mkdir "$HOME/VirtualBox VMs"
         shell: bash
