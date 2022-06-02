@@ -60,6 +60,9 @@ find aria-at/build/tests/ -mindepth 1 -maxdepth 1 -type d -print0 |
       continue
     fi
 
+    echo ${directory}
+    ls ${directory}/*-voiceover_macos.collected.json
+
     ./aria-at-automation-harness/bin/host.js \
       run-plan \
       --reference-hostname ${host_machine_loopback} \
