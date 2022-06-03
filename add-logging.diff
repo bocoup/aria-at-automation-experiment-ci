@@ -1,0 +1,38 @@
+20a21,24
+> function log(message) {
+> 	console.log(new Date().toISOString() + ' ' + message);
+> }
+> 
+804a809
+> 		log('vboxStart');
+805a811
+> 		log('vboxStart - createSession');
+807a814
+> 		log('vboxStart - getGuestProperty');
+808a816,817
+> 		log('vboxStart - getGuestProperty - ' + originalIP);
+> 		log('vboxStart - launchVMProcess');
+809a819
+> 		log('vboxStart - waitForCompletion');
+810a821
+> 		log('vboxStart - getConsole');
+816a828
+> 		log('vboxStart - getMachine');
+817a830
+> 		log('vboxStart - keyboard');
+818a832
+> 		log('vboxStart - mouse');
+819a834
+> 		log('vboxStart - display');
+820a836
+> 		log('vboxStart - guest');
+821a838
+> 		log('vboxStart - getNetworkAdapter');
+822a840
+> 		log('vboxStart - getNATEngine');
+825a844
+> 			log('vboxStart - getGuestProperty');
+826a846
+> 			log('vboxStart - newIP.timeStamp: ' + newIP.timeStamp);
+828a849
+> 		log('vboxStart - newIP.value: ' + newIP.value);

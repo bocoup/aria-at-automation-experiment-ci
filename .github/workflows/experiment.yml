@@ -36,10 +36,8 @@ jobs:
       - name: Register VirtualBox machine image
         run: VBoxManage registervm "$HOME/VirtualBox VMs/macos-1015/macos-1015.vbox"
         shell: bash
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        with:
-          limit-access-to-actor: true
+      - name: Patch dependency
+        run: patch ./aria-at-automation-harness/node_modules/vm-providers/dist/index.js ./add-logging.diff
       - name: Collect results
         run: ./collect.sh
         env:
